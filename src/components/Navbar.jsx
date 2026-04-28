@@ -16,12 +16,17 @@ function Navbar({ lang, setLang }) {
   };
 
   const items = [
-    { id: "home", label: t.nav.home },
-    { id: "lineup", label: t.nav.lineup },
-    { id: "schedule", label: t.nav.schedule },
-    { id: "venue", label: t.nav.venue },
-    { id: "links", label: t.nav.links },
-    { id: "about", label: t.nav.about },
+  { id: "home", label: t.nav.home },
+  { id: "about", label: t.nav.about },
+  { id: "programme", label: t.nav.programme },
+  { id: "lineup", label: t.nav.lineup },
+  { id: "venue", label: t.nav.venue },
+  { id: "awareness", label: t.nav.awareness },
+  { id: "tickets", label: t.nav.tickets },
+  { id: "flyergallery", label: t.nav.flyergallery },
+  { id: "herstory", label: t.nav.herstory },
+  { id: "links", label: t.nav.links },
+  { id: "schedule", label: t.nav.schedule },
   ];
 
   return (
