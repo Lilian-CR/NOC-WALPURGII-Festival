@@ -27,16 +27,6 @@ export default function Footer() {
             >
               <FaFacebookF />
             </a>
-
-            <a
-              href="https://www.instagram.com/mypeoplebooking"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-              className="hover:opacity-70 transition"
-            >
-              <FaInstagram />
-            </a>
           </div>
         )}
 
