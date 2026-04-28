@@ -6,7 +6,6 @@ import BandModal from "../components/BandModal";
 import Poster from "../images/poster.png";
 import VenuePhoto from "../images/venue_1.webp";
 
-
 function Home({ lang }) {
   const t = copy[lang];
 
@@ -37,7 +36,7 @@ Miejsce dysponuje profesjonalną obsługą, ochroną oraz nagłośnieniem i ośw
 The club provides professional staff, security, as well as high-quality sound and lighting. It features two stages (Stage 1 and Stage 2) with facilities including a bar and backstage areas, and it is also available for rent for concerts, festivals, and private events.`,
     },
   };
-  
+
   const [selectedBand, setSelectedBand] = useState(null);
   const [showBackToTop, setShowBackToTop] = useState(false);
   const lineupRef = useRef(null);
@@ -68,19 +67,63 @@ The club provides professional staff, security, as well as high-quality sound an
           </div>
 
           <div className="md:col-span-2 flex justify-center md:justify-end">
-  <button
-    type="button"
-    onClick={() => setPosterOpen(true)}
-    className="w-full max-w-[360px] focus:outline-none"
-    aria-label="Open poster in full size"
-  >
-    <img
-      src={Poster}
-      alt="Noc Walpurgii poster"
-      className="w-full object-contain rounded-lg border border-white/20 bg-white/10 hover:opacity-90 transition"
-    />
-  </button>
-</div>
+            <button
+              type="button"
+              onClick={() => setPosterOpen(true)}
+              className="w-full max-w-[360px] focus:outline-none"
+              aria-label="Open poster in full size"
+            >
+              <img
+                src={Poster}
+                alt="Noc Walpurgii poster"
+                className="w-full object-contain rounded-lg border border-white/20 bg-white/10 hover:opacity-90 transition"
+              />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* ABOUT */}
+      <section id="about" className="scroll-mt-24 py-10 px-4 bg-primary/50 text-black">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-2xl font-black mb-6">{t.sections.aboutTitle}</h2>
+
+          <div className="space-y-6">
+            <div className="w-full overflow-hidden rounded-lg border border-black/10 bg-black/5">
+              <img
+                src="https://scontent-ber1-1.xx.fbcdn.net/v/t39.30808-6/558863477_122149637510827117_2248463521515712768_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=833d8c&_nc_ohc=lWrcokJQhBAQ7kNvwE7MCYX&_nc_oc=AdnDr-S8Lc4vT3xTGj7hIFlZJcgyFn_SqY4YSaCajvRiUH6CDJZ9BYAqtshy3uXdRMSLlYbYkHO8_yR8shUMLF_v&_nc_zt=23&_nc_ht=scontent-ber1-1.xx&_nc_gid=V66z5M--PjJ7qwL_lwtTkg&oh=00_AfpaL7Bzc7k5txwmG_yWts92JxC2uR2iuGLwsaSzDZJp4g&oe=69724C2E"
+                alt="About section image"
+                className="w-full h-auto object-cover"
+              />
+            </div>
+
+            <div className="text-sm leading-relaxed text-justify">
+              {lang === "pl" ? (
+                <>
+                  <p className="font-bold mb-3 text-left">Emancypunx i Refuse prezentują:</p>
+                  <p className="font-black text-lg mb-4 text-left">NOC WALPURGII FESTIWAL</p>
+                  <p>Festiwal Noc Walpurgii powraca do Warszawy, aby uczcić 30-lecie swojego istnienia! Tegoroczna edycja odbędzie się 30 kwietnia 2026 roku w klubie VooDoo.</p>
+                </>
+              ) : (
+                <>
+                  <p className="font-bold mb-3 text-left">Emancypunx & Refuse present:</p>
+                  <p className="font-black text-lg mb-4 text-left">NOC WALPURGII 2026 — 30 YEARS!</p>
+                  <p>
+                    Noc Walpurgii Festival returns to Warsaw to celebrate its 30th anniversary! This year’s edition will take place on{" "}
+                    <strong>30 April 2026</strong> at <strong>VooDoo Club</strong>.
+                  </p>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* PROGRAMME */}
+      <section id="programme" className="scroll-mt-24 py-10 px-4 bg-white text-black">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-2xl font-black mb-6">{t.nav.programme}</h2>
+          <div className="text-sm text-black/70">Już wkrótce! // Coming soon!</div>
         </div>
       </section>
 
@@ -91,107 +134,89 @@ The club provides professional staff, security, as well as high-quality sound an
             <h2 className="text-2xl font-black">{t.sections.lineupTitle}</h2>
 
             <div className="hidden md:flex gap-2">
-              <button
-                onClick={() => scrollLineup("left")}
-                className="px-3 py-2 border border-black/20 rounded hover:bg-black hover:text-white"
-                aria-label="Scroll left"
-              >
+              <button onClick={() => scrollLineup("left")} className="px-3 py-2 border border-black/20 rounded hover:bg-black hover:text-white" aria-label="Scroll left">
                 ←
               </button>
-              <button
-                onClick={() => scrollLineup("right")}
-                className="px-3 py-2 border border-black/20 rounded hover:bg-black hover:text-white"
-                aria-label="Scroll right"
-              >
+              <button onClick={() => scrollLineup("right")} className="px-3 py-2 border border-black/20 rounded hover:bg-black hover:text-white" aria-label="Scroll right">
                 →
               </button>
             </div>
           </div>
 
-          <div
-  ref={lineupRef}
-  className="flex gap-4 overflow-x-auto pb-3 scrollbar-hide snap-x snap-mandatory scroll-smooth"
->
-  {[...bands]
-    .sort((a, b) => a.name.localeCompare(b.name, "pl", { sensitivity: "base" }))
-    .map((band) => (
-      <BandCard
-        key={band.id}
-        band={band}
-        onClick={() => setSelectedBand(band)}
-      />
-    ))}
-</div>
-        </div>
-      </section>
-
-      {/* SCHEDULE */}
-      <section id="schedule" className="scroll-mt-24 py-10 px-4 bg-white text-black">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl font-black mb-6">{t.sections.scheduleTitle}</h2>
-          <div className="text-sm text-black/70">
-          Już wkrótce! // Coming soon!
+          <div ref={lineupRef} className="flex gap-4 overflow-x-auto pb-3 scrollbar-hide snap-x snap-mandatory scroll-smooth">
+            {[...bands]
+              .sort((a, b) => a.name.localeCompare(b.name, "pl", { sensitivity: "base" }))
+              .map((band) => (
+                <BandCard key={band.id} band={band} onClick={() => setSelectedBand(band)} />
+              ))}
           </div>
         </div>
       </section>
 
       {/* VENUE */}
-<section id="venue" className="scroll-mt-24 py-10 px-4 bg-primary/50 text-black">
-  <div className="max-w-6xl mx-auto">
-    <h2 className="text-2xl font-black mb-6">{t.sections.venueTitle}</h2>
+      <section id="venue" className="scroll-mt-24 py-10 px-4 bg-primary/50 text-black">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-2xl font-black mb-6">{t.sections.venueTitle}</h2>
 
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-      {/* Left: photo */}
-      <div className="w-full overflow-hidden rounded-lg border border-black/10 bg-black/5">
-        <img
-          src={VenuePhoto}
-          alt="VooDoo Club venue"
-          className="w-full h-full object-cover"
-        />
-      </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+            <div className="w-full overflow-hidden rounded-lg border border-black/10 bg-black/5">
+              <img src={VenuePhoto} alt="VooDoo Club venue" className="w-full h-full object-cover" />
+            </div>
 
-      {/* Right: info + map */}
-      <div>
-        <h3 className="text-xl font-black uppercase tracking-wide">
-          {venue.name}
-        </h3>
+            <div>
+              <h3 className="text-xl font-black uppercase tracking-wide">{venue.name}</h3>
+              <p className="text-sm text-black/70 mt-2">{venue.address}</p>
+              <p className="text-sm leading-relaxed text-black/80 mt-4 whitespace-pre-line text-justify">{venue.description?.[lang]}</p>
 
-        <p className="text-sm text-black/70 mt-2">
-          {venue.address}
-        </p>
-
-        <p className="text-sm leading-relaxed text-black/80 mt-4 whitespace-pre-line text-justify">
-          {venue.description?.[lang]}
-        </p>
-
-        <div className="mt-5 w-full aspect-[16/9] overflow-hidden rounded-lg border border-black/10">
-          <iframe
-            title="VooDoo Club map"
-            src={venue.mapEmbed}
-            className="w-full h-full"
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
+              <div className="mt-5 w-full aspect-[16/9] overflow-hidden rounded-lg border border-black/10">
+                <iframe title="VooDoo Club map" src={venue.mapEmbed} className="w-full h-full" loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+      </section>
 
-            {/* LINKS */}
-            <section id="links" className="scroll-mt-24 py-10 px-4 bg-white text-black">
+      {/* AWARENESS */}
+      <section id="awareness" className="scroll-mt-24 py-10 px-4 bg-white text-black">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-2xl font-black mb-6">{t.nav.awareness}</h2>
+          <div className="text-sm text-black/70">Już wkrótce! // Coming soon!</div>
+        </div>
+      </section>
+
+      {/* TICKETS */}
+      <section id="tickets" className="scroll-mt-24 py-10 px-4 bg-primary/50 text-black">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-2xl font-black mb-6">{t.nav.tickets}</h2>
+          <div className="text-sm text-black/70">Już wkrótce! // Coming soon!</div>
+        </div>
+      </section>
+
+      {/* FLYER GALLERY */}
+      <section id="flyergallery" className="scroll-mt-24 py-10 px-4 bg-white text-black">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-2xl font-black mb-6">{t.nav.flyergallery}</h2>
+          <div className="text-sm text-black/70">Już wkrótce! // Coming soon!</div>
+        </div>
+      </section>
+
+      {/* HERSTORY */}
+      <section id="herstory" className="scroll-mt-24 py-10 px-4 bg-primary/50 text-black">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-2xl font-black mb-6">{t.nav.herstory}</h2>
+          <div className="text-sm text-black/70">Już wkrótce! // Coming soon!</div>
+        </div>
+      </section>
+
+      {/* LINKS */}
+      <section id="links" className="scroll-mt-24 py-10 px-4 bg-white text-black">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl font-black mb-6">{t.sections.linksTitle}</h2>
 
           <ul className="space-y-3">
             {festivalLinks.map((item) => (
               <li key={item.url}>
-                <a
-                  href={item.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4 hover:opacity-80 transition"
-                >
+                <a href={item.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4 hover:opacity-80 transition">
                   {item.label}
                 </a>
               </li>
@@ -200,116 +225,14 @@ The club provides professional staff, security, as well as high-quality sound an
         </div>
       </section>
 
-      {/* ABOUT */}
-<section id="about" className="scroll-mt-24 py-10 px-4 bg-primary/50 text-black">
-  <div className="max-w-6xl mx-auto">
-    <h2 className="text-2xl font-black mb-6">{t.sections.aboutTitle}</h2>
+      {/* SCHEDULE */}
+      <section id="schedule" className="scroll-mt-24 py-10 px-4 bg-white text-black">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-2xl font-black mb-6">{t.sections.scheduleTitle}</h2>
+          <div className="text-sm text-black/70">Już wkrótce! // Coming soon!</div>
+        </div>
+      </section>
 
-    <div className="space-y-6">
-      {/* About image */}
-      <div className="w-full overflow-hidden rounded-lg border border-black/10 bg-black/5">
-        <img
-          src="https://scontent-ber1-1.xx.fbcdn.net/v/t39.30808-6/558863477_122149637510827117_2248463521515712768_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=833d8c&_nc_ohc=lWrcokJQhBAQ7kNvwE7MCYX&_nc_oc=AdnDr-S8Lc4vT3xTGj7hIFlZJcgyFn_SqY4YSaCajvRiUH6CDJZ9BYAqtshy3uXdRMSLlYbYkHO8_yR8shUMLF_v&_nc_zt=23&_nc_ht=scontent-ber1-1.xx&_nc_gid=V66z5M--PjJ7qwL_lwtTkg&oh=00_AfpaL7Bzc7k5txwmG_yWts92JxC2uR2iuGLwsaSzDZJp4g&oe=69724C2E"
-          alt="About section image"
-          className="w-full h-auto object-cover"
-        />
-      </div>
-
-      {/* About text */}
-      <div className="text-sm leading-relaxed text-justify">
-        {lang === "pl" ? (
-          <>
-            <p className="font-bold mb-3 text-left">Emancypunx i Refuse prezentują:</p>
-            <p className="font-black text-lg mb-4 text-left">NOC WALPURGII FESTIWAL</p>
-
-            <p>
-              Festiwal Noc Walpurgii powraca do Warszawy, aby uczcić 30-lecie swojego istnienia!
-              Tegoroczna edycja odbędzie się 30 kwietnia 2026 roku w klubie VooDoo.
-            </p>
-
-            <p className="mt-4">
-              Pierwsza edycja festiwalu miała miejsce 30 kwietnia 1996 roku, w trakcie legendarnego święta czarownic,
-              w warszawskim klubie Stodoła.
-            </p>
-
-            <p className="mt-4">
-              Było to wydarzenie przełomowe na rodzimej scenie niezależnej, gdzie motywem przewodnim było podkreślenie udziału kobiet
-              oraz osób nie-heteronormatywnych w kulturze niezależnej. Noc Walpurgii wyrażała również otwarty sprzeciw wobec seksizmu,
-              homofobii oraz wszelkich form wykluczenia.
-            </p>
-
-            <p className="mt-4">
-              Noc Walpurgii – legendarne święto i czas złotów czarownic stało się inspiracją dla organizacji festiwalu, który od zawsze miał
-              wzmacniać, inspirować, poszerzać świadomość i tworzyć przestrzeń dla wszystkich osób wykluczonych.
-            </p>
-
-            <p className="mt-4">
-              Od początku Noc Walpurgii była czymś więcej niż tylko serią koncertów – obejmowała performance, happeningi, spotkania,
-              warsztaty, DJ-sety oraz wiele innych form ekspresji, a czasem też demonstracje jak „Odzyskać Noc” czy pokazy filmowe.
-            </p>
-
-            <p className="mt-4">
-              W latach 1996–2010 festiwal odbywał się w Warszawie, a następnie funkcjonował w Berlinie, gdzie trwał do 2018 roku
-              (z przerwą spowodowaną pandemią w 2020). Teraz, po 16 latach, wydarzenie wraca do Warszawy, aby w wyjątkowy sposób uczcić
-              trzy dekady swojego istnienia!
-            </p>
-
-            <p className="mt-4">
-              Zapraszamy wszystkie osoby zainteresowane charakterem festiwalu – zarówno te, które brały udział w poprzednich edycjach,
-              jak i tych, którym jeszcze nie było dane doświadczyć Nocy Walpurgii!
-            </p>
-          </>
-        ) : (
-          <>
-            <p className="font-bold mb-3 text-left">Emancypunx & Refuse present:</p>
-            <p className="font-black text-lg mb-4 text-left">NOC WALPURGII 2026 — 30 YEARS!</p>
-
-            <p>
-              Noc Walpurgii Festival returns to Warsaw to celebrate its 30th anniversary! This year’s edition will take place on{" "}
-              <strong>30 April 2026</strong> at <strong>VooDoo Club</strong>.
-            </p>
-
-            <p className="mt-4">
-              The first edition of the festival took place on <strong>30 April 1996</strong>, during the legendary witches’ night,
-              at the <strong>Stodoła Club</strong> in Warsaw.
-            </p>
-
-            <p className="mt-4">
-              It was a groundbreaking event for the Polish independent scene, with a strong focus on highlighting the participation
-              of women and non-heteronormative people in independent culture. Noc Walpurgii also expressed open opposition to sexism,
-              homophobia, and all forms of exclusion.
-            </p>
-
-            <p className="mt-4">
-              Noc Walpurgii — a legendary celebration and the time of witches’ gatherings — became the inspiration for organising a
-              festival that has always aimed to empower, inspire, raise awareness, and create space for all excluded people, so that
-              we can celebrate our diversity together.
-            </p>
-
-            <p className="mt-4">
-              From the very beginning, Noc Walpurgii has been more than just a series of concerts — it has included performances,
-              happenings, meetings, workshops, DJ sets, and many other creative forms of artistic expression, and sometimes also
-              demonstrations such as “Reclaim the Night”, as well as film screenings.
-            </p>
-
-            <p className="mt-4">
-              Between <strong>1996 and 2010</strong>, the festival took place in Warsaw, and later continued in Berlin, where it ran
-              until <strong>2018</strong> (with a break caused by the pandemic in 2020). Now, after <strong>16 years</strong>, the
-              event returns to Warsaw to celebrate three decades of its existence in a truly special way!
-            </p>
-
-            <p className="mt-4">
-              We invite everyone interested in the spirit of the festival — both those who took part in previous editions, and those
-              who have not yet had the chance to experience Noc Walpurgii.
-            </p>
-          </>
-        )}
-      </div>
-    </div>
-  </div>
-</section>
-
-      {/* Back to top (mobile only) */}
       {showBackToTop && (
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
@@ -320,10 +243,7 @@ The club provides professional staff, security, as well as high-quality sound an
         </button>
       )}
 
-      {/* Modal */}
-      {selectedBand && (
-        <BandModal band={selectedBand} lang={lang} onClose={() => setSelectedBand(null)} />
-      )}
+      {selectedBand && <BandModal band={selectedBand} lang={lang} onClose={() => setSelectedBand(null)} />}
     </>
   );
 }
